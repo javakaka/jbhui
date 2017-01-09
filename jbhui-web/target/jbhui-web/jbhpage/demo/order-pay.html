@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>结算页</title>
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="minimal-ui=yes,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="wap-font-scale" content="no">
+<meta name="applicable-device" content="mobile">
+<meta name="Keywords" content="结算页">
+<meta name="Description" content="结算页">
+<meta name="tp_page" content="CHECKOUT_H5_HOME.0">
+<link href="./order-pay_files/global_site_baseNoFont.css" rel="stylesheet" type="text/css">
+<link href="./order-pay_files/checkoutIndex.css" rel="stylesheet" type="text/css">
+</head>
+<body mycollectionplug="bind">
+<!-- h5 global top -->
+<div id="container">
+<input type="hidden" id="errorMsg" value="">
+<input type="hidden" id="errorMsgToCart" value="">
+<input type="hidden" id="checkboxStr" value="1339388_0-2=1">
+<input type="hidden" id="checkoutError" value="">
+<input type="hidden" id="checkoutGoBack" value="">
+<input type="hidden" id="splitCheckout" value="">
+<input type="hidden" id="checkoutType" value="">
+<form method="post" name="checkout_productForm" id="checkout_productForm">
+<input type="hidden" name="checkboxStr" id="from_checkboxStr">
+</form>
+<div class="touchweb_page-order">
+<div class="public_com-header">
+<!-- left start -->
+<a href="javascript:checkoutGoBack();" class="left icon-back"></a>
+<!-- left end -->
+<!-- title start -->
+<h1>确认订单
+</h1>
+<!-- title end -->
+</div>
+<a class="userInfo" href="">
+您当前没有收货地址，点击新建
+</a>
+<input type="hidden" id="receiverId" value="">
+<input type="hidden" id="fastByPhoneFlag" name="fastByPhoneFlag" value="0">
+<div class="payment" data-tpa="CHANGE_PAYMENT" data-trackersend="1">
+<div class="payment">
+<div class="pay_way">
+<div class="content">支付方式</div>
+</div>
+</div>
+<div class="pay_option_list">
+</div>
+</div>
+<input type="hidden" id="isHaigouAuth" value="0">
+<input type="hidden" id="isSamCardAuth" value="0">
+<div class="payment" id="valid_code_div" style="display:none"></div>
+<div class="submit_box" data-tpa="SUBMIT_ORDER" data-trackersend="1">
+<div class="order_totol_cost">
+<span class="totol_cost">合计：<span class="cost"><span class="small">￥</span>
+9.9
+</span></span>
+</div>
+<a href="javascript:;" class="submit">提交订单</a>
+</div>
+<input type="hidden" name="validCodeSig" id="validCodeSig">
+</div>
+</div>
+<!-- 订金预售 活动规则 弹窗 -->
+<div class="pop_prepares_rule hide">
+<div class="main">
+<div class="head">活动规则</div>
+<div class="body">
+<ol>
+<li>活动时间：（商品详情页仅在付定金期间展示相关信息）
+<ol>
+<li>定金支付时间：请见商品详情页及活动页面展示。</li>
+<li>尾款支付时间：请见商品详情页、活动页面以及订单详情页展示。</li>
+</ol>
+</li>
+<li>定金预售——普通预售，用户按照对应活动时间分别支付定金/尾款。</li>
+<li>定金预售——阶梯价：所有用户最终支付的商品预售价会因总付定金人数不同而不同。阶梯价总共分为三个阶段，每个阶段对应的人数及预售价可见商品详情页；最终需支付订单金额会在付尾款前统一变更，其按照相应阶段对应的商品预售价计算。</li>
+<li>定金预售——满减：定金预售商品可参与满减活动，具体满减金额可见商品详情页、订单详情页。</li>
+<li>定金预售——定金膨胀，定金可抵用金额请见商详页，用户实付商品金额为：实付价=预售价—（抵用金额-定金）。</li>
+<li>参与定金预售的商品及信息详见商品商详页。同一订单仅限购买一种定金预售商品，且定金预售商品不能与普通商品一同购买，如拟购买的定金预售商品可以多件购买，则在购买限额内，同一订单同种商品可购买多件。</li>
+<li>定金预售商品的定金及尾款支付均仅支持支付宝线上支付，不可使用1号店礼品卡、余额，不可使用抵用券。</li>
+<li>选购预售商品后，您需在提交订单后30分钟内完成在线定金支付，未在限期内支付完毕定金的，订单将被自动取消。一旦定金支付完毕则您与商家构成有效定金合同关系。定金一旦支付成功，您不得自行取消订单，否则定金不予退回。</li>
+<li>您需在尾款支付时间内完成全额尾款的支付（即：预售价与定金之差），待商家正式邮件确认发货后，预售商品的订购合同即告成立。如您未按时支付尾款，订单将被自动取消，但已支付的定金不予退回。</li>
+<li>定金预售商品的发货时间以定金预售商品详情页面“预计发货时间”描述为准。如您的商品在您与商家确认之时间内未予以发货的，您可以申请赔付。(定金膨胀活动，仅针对定金进行赔付)在申请审核通过后，您已经支的付定金与尾款会退还，等值于定金的赔付款将返还至您的1号店返利账户；而您的订单将取消，您将不再收到货物。</li>
+<li>由于商品本身质量等问题所需的退换货，与普通订单相同。请按照1号店的退换货规则予以进行。</li>
+<li>本规则未尽事宜，以《1号店用户服务协议》及1号店网站其他相关规定或/和说明为准。</li>
+</ol>
+</div>
+<div class="foot">
+<a href="javascript:;" class="btn btn_confirm">我已认真阅读并确认活动规则</a>
+<a href="javascript:;" class="btn btn_cancel">取消</a>
+</div>
+</div>
+</div>
+<div class="pop_layer">
+<section class="touchweb_com-expressPicker show">
+<div class="p_header">
+<a href="javascript:;" class="close icon-clear"></a>
+</div>
+<div class="picker">
+<div class="selector s1">
+<div class="s_header">配送日期</div>
+<div class="slider" style="height: 442.3px;">
+<ul class="slider_ul" id="deliveryDate">
+</ul>
+</div>
+</div>
+<div class="selector s2">
+<div class="s_header"><span class="s_header_title t1">时间段</span><span class="s_header_title t2">费用</span></div>
+<div class="slider" style="height: 442.3px;">
+<ul class="slider_ul" id="deliveryTime">
+</ul>
+</div>
+</div>
+</div>
+<footer class="p_footer">
+<a href="javascript:;" class="ensure">确定</a>
+</footer>
+</section>
+</div>
+
+<!--js start-->
+<script type="text/javascript" src="./order-pay_files/api.js" charset="utf-8"></script>
+<!--js end-->
+<script type="text/javascript" src="./order-pay_files/global_base_tracker.js" charset="utf-8"></script>
+<script type="text/javascript" src="./order-pay_files/global_base_common.js" charset="utf-8"></script>
+<script type="text/javascript" src="./order-pay_files/checkoutInit.js" charset="utf-8"></script>
+<div style="display:none;">
+<span style="color: #FFFFFF">
+29!$
+55%&amp;
+17#@
+10!$
+,
+</span>
+<span style="color: #FFFFFF">1727203</span>
+<span style="color: #FFFFFF" id="span_server_time_tracker">20161210132115</span>
+</div> <script type="text/javascript" src="./order-pay_files/global_event_listen.js" charset="utf-8"></script>
+<nav></nav>
+
+<div id="__yct_container__" style="display: none; visibility: hidden;"><script src="./order-pay_files/getenv.do"></script></div><input type="hidden" id="__yct_str__" name="__yct_str__" value=""></body></html>

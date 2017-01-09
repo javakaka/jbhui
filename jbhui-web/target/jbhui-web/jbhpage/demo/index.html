@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>爽乐购商城</title>
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="minimal-ui=yes,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="wap-font-scale" content="no">
+<meta name="applicable-device" content="mobile">
+<meta name="Keywords" content="爽乐购商城">
+<meta name="Description" content="爽乐购商城">
+<meta name="tp_page" content="H5-HOMEPAGE.0">
+<meta name="ios" content="" wireless2content="">
+<meta name="android" content="" wireless2content="">
+<meta name="h5" content="">
+
+<link href="./resource/global_site_index.css" rel="stylesheet" type="text/css">
+<link href="./resource/homepage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./resource/swipe.js"></script>
+<script type="text/javascript" src="./resource/zepto.js"></script>
+<style id="__web-inspector-hide-shortcut-style__" type="text/css">
+.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
+{
+    visibility: hidden !important;
+}
+</style></head>
+<body mycollectionplug="bind" data-new-user-popup-flag="1">
+<!-- h5 global top -->
+<div id="container" style="height: auto;">
+<div id="container_inner">
+<div class="touchweb_page-index" data-tpa="H5_HOMEPAGE_BODY">
+<div class="blocks" id="blocks">
+<!-- top  -->
+<div class="touchweb-com_header index fixed" id="globalHeader">
+	<a href="index.html" class="header_logo">
+	<img src="./resource/header_logo.png">
+	</a>
+	
+	<div id="searchBox" class="search_wrap">
+	<div class="search_box focus">
+	<form name="searchForm" id="searchForm" method="get">
+	<input type="search" placeholder="搜索商品" name="keyword" id="keyword" class="search_txt" value="" data-original="" autocomplete="off">
+	<span class="icon-search"></span>
+	<span class="icon_back icon-back"></span>
+	<span class="icon_delete icon-delete" style="display: none;"></span>
+	</form>
+	</div>
+	<a class="btn_search" id="searchBtn" href="javascript:;">搜索</a>
+	<div class="touchweb_components-searchList" id="searchSuggest">
+	<div class="tags"></div>
+	<ul></ul>
+	<a class="clear_history" href="javascript:;">清除历史记录</a>
+	</div>
+	</div>
+	<div class="rightBox" data-tpa="H5_GLOBAL_HEADER_RIGHTBOX">
+	<a href="index.html" class="right" data-tpa="H5_GLOBAL_HEADER_CATEGORY">
+	<span class="right_text icon-sort_big_pic">
+	</span>
+	<span class="icon_text">消息</span>
+	</a>
+	<!-- 
+	<a href="" class="right" data-tpa="H5_GLOBAL_HEADER_CART">
+	<span class="right_text icon-cart">
+	</span>
+	<span class="icon_text">扫一扫</span>
+	</a>
+	-->
+	</div>
+</div>
+<div style="-webkit-transform:translate3d(0,0,0);">
+		<div id="banner_box" class="box_swipe" style="visibility: visible;">
+			<ul style="list-style: none; transition-duration: 500ms; transform: translate3d(-2864px, 0px, 0px); width: 3580px;">
+				<li style="width: 716px; display: table-cell; vertical-align: top;">
+					<a href="goods-detail.html?id=1">
+					<img src="./resource/1.png" alt="1" style="width:100%;">
+					</a>
+				</li>
+				<li style="width: 716px; display: table-cell; vertical-align: top;">
+					<a href="goods-detail.html?id=1">
+					<img src="./resource/2.png" alt="2" style="width:100%;">
+					</a>
+				</li>
+				<li style="width: 716px; display: table-cell; vertical-align: top;">
+					<a href="goods-detail.html?id=1">
+					<img src="./resource/3.png" alt="3" style="width:100%;">
+				</a>
+				</li>
+				<li style="width: 716px; display: table-cell; vertical-align: top;">
+					<a href="goods-detail.html?id=1">
+					<img src="./resource/4.png" alt="4" style="width:100%;">
+					</a>
+				</li>
+				<li style="width: 716px; display: table-cell; vertical-align: top;">
+					<a href="goods-detail.html?id=1">
+					<img src="./resource/5.png" alt="5" style="width:100%;">
+					</a>
+				</li>
+			</ul>
+			<ol>
+				<li class=""></li>
+				<li class=""></li>
+				<li class=""></li>
+				<li class="on"></li>
+				<li class=""></li>
+			</ol>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			new Swipe(document.getElementById('banner_box'), {
+				speed:500,
+				auto:3000,
+				callback: function(){
+					var lis = $(this.element).next("ol").children();
+					lis.removeClass("on").eq(this.index).addClass("on");
+				}
+			});
+		});
+	</script>
+	<!--  function nav -->
+	<div class="touchweb_components-headerMenu" id="iconNav">
+		<a href="index.html" class="item">
+			<span class="icon_box">
+			<img src="./resource/func-nav1.png" alt="1号团" class="icon">
+			</span>
+			<span class="title">功能1</span>
+		</a>
+		<a href="index.html" class="item">
+			<span class="icon_box">
+			<img src="./resource/func-nav1.png" alt="1号团" class="icon">
+			</span>
+			<span class="title">功能2</span>
+		</a>
+		<a href="index.html" class="item">
+			<span class="icon_box">
+			<img src="./resource/func-nav1.png" alt="1号团" class="icon">
+			</span>
+			<span class="title">功能3</span>
+		</a>
+		<a href="index.html" class="item">
+			<span class="icon_box">
+			<img src="./resource/func-nav1.png" alt="1号团" class="icon">
+			</span>
+			<span class="title">功能4</span>
+		</a>
+		
+</div>
+<!-- scroll news -->
+<div class="jbh-express-news">
+	<a  class="J_ping jbh-news-tit" href="index.html">实时动态:</a>
+	<div id="scroll-news" class="news-list-wrapper">
+		<ul class="news-list" style="">
+			<li class="news-item">
+				 <a   href="index.html" ><span class="red">抢</span>特价促销活动！</a>
+			</li>
+		</ul>
+	</div>
+	<a class="J_ping jbh-news-more" href="index.html"><i class="line"></i>更多</a>
+</div>
+<div class="feature_channel">
+</div>
+		<div class="precision_column" id="">
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/1.png" alt="" class="">
+					</div>
+					<h3>小米 红米Note4 高配版 金色 64GB 全网通4G手机 移动合约版</h3>				
+					<div class="price_box">
+						   <strong>￥1199</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/2.png" alt="" class="">
+					</div>
+					<h3>素色の生活 买1送1  连裤袜秋冬季中厚 防勾丝瘦腿袜美腿塑形丝袜踩脚打底袜压力裤袜女显瘦280D黑色【10-20℃】踩脚均码（适合140斤以</h3>				
+					<div class="price_box">
+						   <strong>￥26</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/3.png" alt="" class="">
+					</div>
+					<h3>Salzburger 萨尔茨堡 纯牛奶 全脂牛奶 1L 奥地利进口</h3>				
+					<div class="price_box">
+						   <strong>￥17.8</strong>
+					</div>
+				</a>
+				     
+						
+				
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/4.png" alt="" class="">
+					</div>
+					<h3>华为P9 3+32G 全网通 钛银灰</h3>				
+					<div class="price_box">
+						   <strong>￥2888</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/5.png" alt="" class="">
+					</div>
+					<h3>浪莎 3条 连裤袜 女士天鹅绒120D打底丝袜 女 舒适春秋款美腿显瘦  LKWJ007黑色/3条均码（120D天鹅绒）</h3>				
+					<div class="price_box">
+						   <strong>￥39</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/6.png" alt="" class="">
+					</div>
+					<h3>SUKI多美鲜 全脂牛奶 纯牛奶 1L/盒 德国进口</h3>				
+					<div class="price_box">
+						   <strong>￥15.9</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/7.png" alt="" class="">
+					</div>
+					<h3>360手机 N4S 全网通 高配骁龙版 流光金 4GB+64GB 移动联通电信4G手机 双卡双待</h3>				
+					<div class="price_box">
+						   <strong>￥1299</strong>
+					</div>
+				</a>
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/8.png" alt="" class="">
+					</div>
+					<h3>南极人 美腿连裤袜天鹅绒80D显瘦加档防勾丝美腿丝袜子女秋季打底裤袜16色 30072黑色均码</h3>				
+					<div class="price_box">
+						   <strong>￥13.9</strong>
+					</div>
+				</a>
+				     
+						
+				
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/9.png" alt="" class="">
+					</div>
+					<h3>Suki多美鲜 低脂牛奶 1L 德国进口</h3>				
+					<div class="price_box">
+						   <strong>￥16.9</strong>
+					</div>
+				</a>
+				     
+						
+				
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/10.png" alt="" class="">
+					</div>
+					<h3>洁柔 布艺倍柔系列2层180抽抽取式纸面巾*3包(M号)</h3>				
+					<div class="price_box">
+						   <strong>￥6.9</strong>
+					</div>
+				</a>
+				     
+						
+				
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/11.png" alt="" class="">
+					</div>
+					<h3>清风原木纯品系列2层150抽中幅抽取式面纸*(3+1)包</h3>				
+					<div class="price_box">
+						   <strong>￥14.9</strong>
+					</div>
+				</a>
+				     
+						
+				
+			</div>
+			<div class="product_item">
+				<a href="goods-detail.html?id=1">
+					<div class="pic_box">
+						<img src="./resource/12.png" alt="" class="">
+					</div>
+					<h3>洁柔 蓝面子系列3层140g筒卷卫生纸*12卷</h3>				
+					<div class="price_box">
+						   <strong>￥39.9</strong>
+					</div>
+				</a>
+			</div>
+		</div>
+</div>
+<div class="touchweb_com-backTop">
+<a href="index.html"></a>
+</div>
+<div class="copyright">
+<p>爽乐购商城</p>
+<p></p>
+</div>
+</div>
+</div>
+<div id="fixed_layer"></div>
+</div>
+<nav></nav>
+	<div class="floor bottom-bar-pannel">
+	    <div class="floor-container  ">
+			<ul class="tab5">
+			<li><span class="bar-img"><a  page_name="index" href="javascript:void(0)"><img src="./resource/home-btn.png"></a></span></li>
+			<li><span class="bar-img"><a  page_name="index" href="cate.html"><img src="./resource/cate-btn.png"></a></span></li>
+			<!-- 
+			<li><span class="bar-img"></span></li>
+			-->
+			<li><span class="bar-img"><a  page_name="index" href="cart-login.html"><img src="./resource/cart-btn.png"></a></span></li>
+			<li><span class="bar-img"><a  page_name="index" href="user-profile.html?id=1"><img src="./resource/user-home-btn.png"></a></span></li>
+		</ul>
+		</div>
+	</div>
+	<!-- 
+	<div class="floor bottom-bar-activity">
+		<span class="bar-img">
+			<a class="" href="index.html"><img src="./resource/info-btn.png"></a>
+		</span>
+	</div>
+	-->
+</body>
+</html>

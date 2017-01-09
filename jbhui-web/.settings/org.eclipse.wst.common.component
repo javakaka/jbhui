@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jbhui-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="ezcloud-base-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ezcloud-base/ezcloud-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ezcloud-robot-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ezcloud-robot/ezcloud-robot">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbhui-h5-shop-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbhui-h5-shop/jbhui-h5-shop">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jbhui-wechat-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbhui-wechat/jbhui-wechat">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ezcloud-wechat-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ezcloud-wechat/ezcloud-wechat">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="crds-dm-1.0-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/crds-dm/crds-dm">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/jbhui-web/target/classes"/>
+        <property name="context-root" value="jbhui"/>
+    </wb-module>
+</project-modules>

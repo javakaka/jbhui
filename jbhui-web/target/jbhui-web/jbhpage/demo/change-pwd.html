@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>修改密码</title>
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="minimal-ui=yes,width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="wap-font-scale" content="no">
+<meta name="applicable-device" content="mobile">
+<meta name="tp_page" content="5086.0">
+<link href="./resource/global_site_base.css" rel="stylesheet" type="text/css">
+<link href="./resource/h5ChangePassword.css" rel="stylesheet" type="text/css">
+</head>
+<body mycollectionplug="bind">
+<div class="touchweb-com_header header_flex" id="globalHeader">
+<a id="topIconBack" class="left icon-back" onclick="javascript:window.history.go(-1)" href="javascript:void(0);" data-tpa="H5_GLOBAL_ICON_GOBACK" data-trackersend="1"></a>
+<h1>提交验证码</h1>
+<div class="rightBox" >
+</div></div>
+<div class="wrap">
+<p class="mt">为了您账户安全，修改密码前，须进行手机验证。已发送验证码至您已绑定手机： <span class="deepRed"></span></p>
+<div class="verfyCod mt clearfix">
+<a href="javascript:getsms();" id="twice" data-tpa="1330" class="greyBtn">
+<em class="none" id="tipsNone" style="display: none;">重新</em>获取验证码
+<span id="timerOutTips" class="timerOut none" style="display: inline;">(<ins id="timer" class="">39</ins>s)</span>
+</a>
+<span class="w48 relative">
+<ins class="iptTip">验证码:</ins>
+<span class="clearIpt none">清空</span>
+<ins class="mobiIpt"><input placeholder="请输入验证码" type="text" id="verifyCode" name="verifyCode" value=""></ins>
+<input type="hidden" value="60" id="timerValue">
+<input type="hidden" value="1" id="verifyStatus">
+</span>
+<p class="mobiEror mt" id="msgs">
+<i class="alertIco"></i>
+<ins id="errinfo">验证码发送成功，请查收</ins>
+</p>
+</div>
+<p class="alignC mt mb">
+<a id="checkVerfyCod" class="redBtn w48 h38" onclick="checkVerfyCod()" data-tpa="1331">提交</a>
+</p>
+</div>
+<nav></nav>
+</body></html>
