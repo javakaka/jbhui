@@ -198,13 +198,13 @@ img{max-width:none;}
 <!-- H5跳转APP -->
 <div class="pd_product-buy-num show" id="product-buy-num">
 <div class="pd_product-num-wrap">
-<span class="pd_product-num-minus pd_product-num_disable" ></span>
+<span class="pd_product-num-minus pd_product-num_disable"  id="minusBtn"></span>
 <input class="pd_product-num-form" type="number" min="1" max="999" value="1" id="buycount" required="">
-<span class="pd_product-num-plus" ></span>
+<span class="pd_product-num-plus" id="plusBtn"></span>
 </div>
-<a href="javascript:;" class="pd_buy-now" id="buynow">立即购买</a>
+<a href="javascript:buyNow();" class="pd_buy-now" id="buynow">立即购买</a>
 <a href="javascript:;" class="pd_add-cart" id="reserve" style="display:none;">立即支付定金</a>
-<a href="javascript:;" class="pd_add-cart" id="addcart">加入购物车</a>
+<a href="javascript:addToShopCar(this);" class="pd_add-cart" id="addcart">加入购物车</a>
 <div class="tips_purchase" style="display:none;">
 <span class="icon_close icon-clear"></span>
 </div>
@@ -373,11 +373,12 @@ img{max-width:none;}
 <div class="subscribe_notice hide"><i class="icon-successful"></i> 订阅成功</div>
 </div>
 <nav></nav>
-
+<input type="hidden" name="goods_left_num" id="goods_left_num" value="${goods.LEFT_NUM }"/>
 <script type="text/javascript" src="<%=basePath%>/res/js/gloable.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/httputil.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/utils.js"></script>
+<script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/goods-detail.js"></script>
 </body>
 </html>

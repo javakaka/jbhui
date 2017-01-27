@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- title end -->
     <!-- right start -->
         <div class="rightBox">
-        <a id="login_btn" href="<%=basePath%>h5-login.do" class="right rbtn">
+        <a id="login_btn" href="<%=basePath%>h5-login.do?from_user=${from_user}" class="right rbtn">
             登录
         </a>
         </div>
@@ -148,6 +148,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>/res/js/httputil.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/md5.js"></script>
-<script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/register.js"></script>
+<script type="text/javascript" >
+var from_user ="${from_user}";
+</script>
+
+<script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/register.js?v=1.001"></script>
 </body>
 </html>

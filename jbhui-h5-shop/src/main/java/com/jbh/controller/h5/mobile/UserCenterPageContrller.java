@@ -45,11 +45,11 @@ public class UserCenterPageContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/index",method =RequestMethod.GET)
-	public String indexPage(String cateId,ModelMap model ) {
+	public String indexPage(String from_user,ModelMap model ) {
 		HttpSession session =getSession();
 		Row user =(Row)session.getAttribute("member");
 		if (user == null) {
-			return "/jbhpage/h5/login";
+			return "redirect:/h5-login.do?from_user="+from_user;
 		}
 		String userId =user.getString("id");
 		// 统计订单总数

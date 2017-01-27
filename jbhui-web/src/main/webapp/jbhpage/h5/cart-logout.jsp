@@ -38,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <span class="noCar"></span>
 <p class="alignC">您的购物车内还没有任何商品<br>是否立即登录?</p>
 <div class="mt mb alignC">
-<a href="<%=basePath%>h5-login.do?redirect=<%=basePath%>cart.do" class="redBtn w48 h38">登录</a>
-<a href="<%=basePath%>h5-register.do" class="deepGreyBtn w48 h38">注册</a>
+<a href="<%=basePath%>h5-login.do?redirect=<%=basePath%>cart.do&from_user=${from_user}" class="redBtn w48 h38">登录</a>
+<a href="<%=basePath%>h5-register.do?from_user=${from_user}" class="deepGreyBtn w48 h38">注册</a>
 </div>
 </div>
 <nav></nav>

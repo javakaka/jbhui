@@ -146,7 +146,7 @@ function appendData(list){
 			{
 				html +="<div class=\"status\">";
 				//html +="<em class=\"timer countDown\"><i class=\"hour\">23</i>:<i class=\"minute\">46</i>:<i class=\"seconds\">33</i></em>";
-				html +="<a data-tpa=\"1490\" href=\""+SITE_PATH+"/user/order/detail.do?id="+item.ID+"\" class=\"btn_pay\">立即支付</a>";
+				html +="<a href=\""+SITE_PATH+"/user/order/detail.do?id="+item.ID+"\" class=\"btn_pay\">立即支付</a>";
 				html +="</div>";
 			}
 			html +="</div>";

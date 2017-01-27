@@ -32,9 +32,10 @@ public class CartPageContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/cart",method =RequestMethod.GET)
-	public String indexPage(ModelMap model ) {
+	public String indexPage(String from_user,ModelMap model ) {
 		HttpSession session =getSession();
 		Row user =(Row)session.getAttribute("member");
+		model.addAttribute("from_user", from_user);
 		if (user != null) {
 			return "/jbhpage/h5/cart-login";
 		}

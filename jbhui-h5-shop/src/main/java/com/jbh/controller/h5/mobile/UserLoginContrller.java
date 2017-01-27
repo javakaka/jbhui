@@ -30,21 +30,14 @@ public class UserLoginContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/h5-login",method =RequestMethod.GET)
-	public String loginPage(String cateId,ModelMap model ) {
-		HttpSession session =getSession();
-		Row user =(Row)session.getAttribute("member");
-		int isLogin =0;
-		if (user != null) {
-			isLogin =1;
-		}
-		model.addAttribute("isLogin", isLogin);
-		model.addAttribute("cateId", cateId);
+	public String loginPage(String from_user,ModelMap model ) {
+		model.addAttribute("from_user", from_user);
 		return "/jbhpage/h5/login";
 	}
 	
 	@RequestMapping(value = "/h5-login",method =RequestMethod.POST)
 	@ResponseBody
-	public ResponseVO login(String username,String password,ModelMap model ) {
+	public ResponseVO login(String username,String password,String from_user,ModelMap model ) {
 		ResponseVO ovo =new ResponseVO();
 		Row userRow =userService.findByUserName(username);
 		if (userRow == null ) {
@@ -58,10 +51,18 @@ public class UserLoginContrller  extends BaseController{
 			return ovo;
 		}
 		String pwd =userRow.getString("password");
-		System.out.println("---------------------------------pwd-------------->>" +pwd);
-		System.out.println("---------------------------------pwd-------------->>" +password);
 		if (!pwd.equals(password)) {
 			ovo =new ResponseVO(-2, "密码错误");
+		}
+		//检查用户的openid是否有变化
+		String dbFromUser =userRow.getString("from_user");
+		if( !StringUtil.isEmptyOrNull(from_user) )
+		{
+			if(StringUtil.isEmptyOrNull(dbFromUser) || !dbFromUser.equals(from_user))
+			{
+				userRow.put("from_user", from_user);
+				userService.update(userRow);
+			}
 		}
 		HttpSession session =getSession();
 		session.setAttribute("member",userRow);
@@ -73,15 +74,8 @@ public class UserLoginContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/h5-register",method =RequestMethod.GET)
-	public String regPage(String cateId,ModelMap model ) {
-		HttpSession session =getSession();
-		Row user =(Row)session.getAttribute("member");
-		int isLogin =0;
-		if (user != null) {
-			isLogin =1;
-		}
-		model.addAttribute("isLogin", isLogin);
-		model.addAttribute("cateId", cateId);
+	public String regPage(String from_user,ModelMap model ) {
+		model.addAttribute("from_user", from_user);
 		return "/jbhpage/h5/register";
 	}
 	
@@ -90,13 +84,14 @@ public class UserLoginContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/h5-register-s2",method =RequestMethod.GET)
-	public String regStep2Page(String cateId,ModelMap model ) {
+	public String regStep2Page(String from_user,ModelMap model ) {
 		HttpSession session =getSession();
 		String telephone =(String)session.getAttribute("telephone");
 		if(StringUtil.isEmptyOrNull(telephone)){
 			return "/jbhpage/h5/register";
 		}
 		model.addAttribute("telephone", telephone);
+		model.addAttribute("from_user", from_user);
 		return "/jbhpage/h5/register-s2";
 	}
 	
@@ -106,7 +101,7 @@ public class UserLoginContrller  extends BaseController{
 	 */
 	@RequestMapping(value = "/h5-register-save",method =RequestMethod.POST)
 	@ResponseBody
-	public ResponseVO registerSave(String telephone,String password,String code,ModelMap model ) {
+	public ResponseVO registerSave(String telephone,String password,String code,String from_user,ModelMap model ) {
 		ResponseVO ovo =new ResponseVO();
 		if (StringUtil.isEmptyOrNull(telephone)) {
 			ovo =new ResponseVO(-1,"手机号错误");
@@ -135,6 +130,10 @@ public class UserLoginContrller  extends BaseController{
 		userRow =new Row();
 		userRow.put("telephone", telephone);
 		userRow.put("password", password);
+		if( !StringUtil.isEmptyOrNull(from_user) )
+		{
+			userRow.put("from_user", from_user);
+		}
 		int rowNum =userService.insert(userRow);
 		if (rowNum <1) {
 			ovo =new ResponseVO(-10010,"注册失败，请稍后再试","注册失败，请稍后再试");

@@ -34,7 +34,7 @@ var $total_price =$("#total_price");
 var $total_goods_num =$("#total_goods_num");
 
 document.addEventListener('touchmove', function(e) {
-	e.preventDefault();
+	//e.preventDefault();
 }, false);
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -297,6 +297,7 @@ function refresh() {
 	$.ajax({
 		type:"post",
 		url:PageUrl,
+		async: false,
 		data:params,
 		beforeSend: function (XMLHttpRequest){
 		},
@@ -329,6 +330,8 @@ function refresh() {
 			alert('error');
 		}
 	});
+	//加载购物车中的商品数量
+	loadCartGoodsNum();
 	calGoodsMoneyAndNum();
 }
 
@@ -360,6 +363,7 @@ var orderParams ="";
 // 计算总价格和总数量
 function calGoodsMoneyAndNum()
 {
+	orderParams="";
 	// price 
 	var cart_total_money =parseFloat("0");
 	var cart_total_num =0;

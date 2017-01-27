@@ -5,6 +5,11 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String from_user =request.getParameter("from_user");
+if( from_user == null || from_user.trim().length() == 0 )
+{
+	from_user ="";
+}
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -185,12 +190,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="floor-container  ">
 		<ul class="tab5">
 		<li><span class="bar-img"><a  page_name="index" href="javascript:void(0)"><img src="<%=basePath %>res/jbh/resource/home-btn.png"></a></span></li>
-		<li><span class="bar-img"><a  page_name="index" href="cate.do"><img src="<%=basePath %>res/jbh/resource/cate-btn.png"></a></span></li>
+		<li><span class="bar-img"><a  page_name="index" href="cate.do?from_user=<%=from_user%>"><img src="<%=basePath %>res/jbh/resource/cate-btn.png"></a></span></li>
 		<!-- 
 		<li><span class="bar-img"></span></li>
 		-->
-		<li><span class="bar-img"><a  page_name="index" href="cart.do"><img src="<%=basePath %>res/jbh/resource/cart-btn.png"></a></span></li>
-		<li><span class="bar-img"><a  page_name="index" href="<%=basePath %>user/profile/index.do?id=1"><img src="<%=basePath %>res/jbh/resource/user-home-btn.png"></a></span></li>
+		<li><span class="bar-img"><a  page_name="index" href="cart.do?from_user=<%=from_user%>"><img src="<%=basePath %>res/jbh/resource/cart-btn.png"></a></span></li>
+		<li><span class="bar-img"><a  page_name="index" href="<%=basePath %>user/profile/index.do?from_user=<%=from_user%>"><img src="<%=basePath %>res/jbh/resource/user-home-btn.png"></a></span></li>
 		<!-- 
 		<li><span class="bar-img"><a  page_name="index" href="http://gzfhxxkj.com:8080/jbh/junbinghui/demo/cart-login.html"><img src="<%=basePath %>res/jbh/resource/cart-btn.png"></a></span></li>
 		<li><span class="bar-img"><a  page_name="index" href="http://gzfhxxkj.com:8080/jbh/junbinghui/demo/user-profile.html?id=1"><img src="<%=basePath %>res/jbh/resource/user-home-btn.png"></a></span></li>

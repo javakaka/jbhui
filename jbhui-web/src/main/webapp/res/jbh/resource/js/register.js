@@ -93,7 +93,7 @@ function stepCheckCode()
 				showError(data.msg);
 				return;
 			}
-			window.location.href=SITE_PATH +"/h5-register-s2.do";
+			window.location.href=SITE_PATH +"/h5-register-s2.do?from_user="+from_user;
 		},
 		complete: function (XMLHttpRequest, textStatus){
 			$checkBtn.removeAttr("onclick");

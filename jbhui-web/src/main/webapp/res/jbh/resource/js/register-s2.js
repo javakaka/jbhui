@@ -11,6 +11,7 @@ var $refreshCode =$("#refreshCode");
 var $regBtn =$("#regBtn");
 var $error_tips =$(".error_tips");
 var $errorLable =$("#error-lable");
+var $from_user =$("#from_user");
 
 document.addEventListener('DOMContentLoaded', function() {
 	$(document).ready(function() {
@@ -79,6 +80,7 @@ function stepCheckCode()
 	var tel =$telephone.val();
 	var pwd =$password.val();
 	var code =$tele_code.val();
+	var from_user =$from_user.val();
 	if(isEmpty( tel ))
 	{
 		showError("验证码不能为空");
@@ -102,7 +104,7 @@ function stepCheckCode()
 		return;
 	}
 	
-	var params ={password: hex_md5(pwd),telephone: tel, code: code};
+	var params ={password: hex_md5(pwd),telephone: tel, code: code, from_user: from_user};
 	$.ajax({
 		type:"post",
 		url: SITE_PATH + URI,
@@ -117,7 +119,7 @@ function stepCheckCode()
 				showError(data.msg);
 				return;
 			}
-			window.location.href=SITE_PATH +"/h5-login.do";
+			window.location.href=SITE_PATH +"/h5-login.do?from_user="+from_user;
 		},
 		complete: function (XMLHttpRequest, textStatus){
 			$regBtn.removeAttr("onclick");

@@ -24,7 +24,7 @@ import net.sf.json.JSONObject;
  * 网页基本授权
  * @author TongJianbo
  */
-@Controller("crdsWechatPageBaseAuthController")
+@Controller("jbhWechatPageBaseAuthController")
 public class WechatPageBaseAuthContrller  extends BaseController{
 
 	private static Logger logger =Logger.getLogger( WechatPageBaseAuthContrller.class );
@@ -58,10 +58,10 @@ public class WechatPageBaseAuthContrller  extends BaseController{
 		logger.info("auth code is:"+code);
 		logger.info("appId is:"+appId);
 		logger.info("appSecret is:"+appSecret);
-//		String app_id =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_ID");
-//		String app_secret =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_SECRET");
+		String app_id =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_ID");
+		String app_secret =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_SECRET");
 		//通过code换取网页授权access_token
-		AuthAccessToken token =WeixinUtil.getAuthAccessToken(appId, appSecret, code);
+		AuthAccessToken token =WeixinUtil.getAuthAccessToken(app_id, app_secret, code);
 		logger.info("token is:"+token);
 		String openid =token.getOpenid();
 		String access_token =token.getAccessToken();
@@ -120,15 +120,7 @@ public class WechatPageBaseAuthContrller  extends BaseController{
 			}
 		}
 		logger.info("返回--------------->>");
-//		return "redirect:/wx/credit-home.jhtml?from_user="+openid;
-		return "redirect:/wx/credit-login.jhtml?from_user="+openid;
-//		return "/crdspage/mobile/bind?from_user="+openid;
-	}
-	
-	@RequestMapping(value = "/wx/site/index")
-	public String index(String from_user,ModelMap model) {
-		model.addAttribute( "from_user", from_user);
-		return "/index";
+		return "redirect:/index.do?from_user="+openid;
 	}
 	
 }

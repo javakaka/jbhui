@@ -39,26 +39,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <input type="hidden" id="o2oMerchant" value="">
 </header>
 <div class="wrap chooseAddr mb">
-<div class="whiteBodrBox radio mt">
-<input class="addrIpt radioH5" type="radio" id="delivery1" name="chooseAddr" checked="" value="2">
-<label class="addrCon">
-<p>李明&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p>广东&nbsp;&nbsp;广州市&nbsp;&nbsp;</p>
-<p>增城市</p>
-<p>建设路11号</p>
-<p> 1382*****36&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<ins class="none">112456083</ins>
-</label>
-<input type="hidden" name="provinceName" value="广东">
-<input type="hidden" name="provinceId" value="20">
-<input type="hidden" name="cityName" value="广州市">
-<input type="hidden" name="cityId" value="237">
-<input type="hidden" name="countyName" value="增城市">
-<input type="hidden" name="countyId" value="2288">
-<input type="hidden" name="address" value="建设路11号">
-<input type="hidden" name="goodReceiverId" value="112456083">
-<a href="<%=basePath %>user/address/edit.do?id=1" class="addrEdit" data-tpa="EDIT_ADDRESS"><i class="editIco">&gt;</i></a>
-</div>
+<c:forEach items="${address_list }" var="address" varStatus="status">
+	<div class="whiteBodrBox radio mt">
+		<input class="addrIpt radioH5" type="radio" id="delivery1" name="chooseAddr"  value="${address.ID }">
+		<label class="addrCon">
+		<p>${address.RECEIVE_NAME }&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<p>${address.PROVINCE_NAME }&nbsp;&nbsp;${address.CITY_NAME }&nbsp;&nbsp;</p>
+		<p>${address.REGION_NAME }</p>
+		<p>${address.ADDRESS }</p>
+		<p> ${address.RECEIVE_TEL }&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		</label>
+		<input type="hidden" name="provinceName" value="广东">
+		<input type="hidden" name="provinceId" value="20">
+		<input type="hidden" name="cityName" value="广州市">
+		<input type="hidden" name="cityId" value="237">
+		<input type="hidden" name="countyName" value="增城市">
+		<input type="hidden" name="countyId" value="2288">
+		<input type="hidden" name="address" value="建设路11号">
+		<input type="hidden" name="goodReceiverId" value="112456083">
+		<a href="<%=basePath %>user/address/edit.do?id=${address.ID }" class="addrEdit" data-tpa="EDIT_ADDRESS"><i class="editIco">&gt;</i></a>
+	</div>
+</c:forEach>
 </div>
 <nav></nav>
 <script type="text/javascript" src="<%=basePath%>/res/js/gloable.js"></script>

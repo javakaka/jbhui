@@ -43,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 	<!-- order list start -->
 	<div class="order_change_con" id="order-list">
+	<!-- 
 		<div class="package_detail">
 			<p><em>2016-12-10</em><span class="amount">￥19.9</span></p>
 			<a href="<%=basePath %>goods-detail.do?goodsId=1" class="items a_link">
@@ -64,6 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 	<!-- order list end -->
 	<div id="pullUp" class="idle">
@@ -79,7 +81,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <input type="hidden" value="1" id="pageNums">
 <input type="hidden" value="0" id="source">
 <input type="hidden" value="0" id="o2oSign">
-<span id="loadAll" style="display:none"></span>
 <nav></nav>
 <script type="text/javascript" src="<%=basePath%>/res/js/gloable.js"></script>
 <script type="text/javascript" src="<%=basePath%>/res/js/httputil.js"></script>

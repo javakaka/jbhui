@@ -607,7 +607,7 @@ public class GoodsService extends JdbcService{
 		+" from hslg_goods a "
 		+" left join file_attach_control b on b.DEAL_CODE=a.id and b.DEAL_TYPE='goods_icon' "
 		+" left join file_attach_upload c on b.CONTROL_ID=c.CONTROL_ID "
-		+" where 1=1 and a.state='1' and a.left_num > 0 and a.is_top =1  and a.id in ("+ids+")";
+		+" where 1=1 and a.state='1' and a.left_num > 0  and a.id in ("+ids+")";
 		sSql +=" group by a.id  ";	
 		ds =queryDataSet(sSql);
 		Setting setting =SettingUtils.get();

@@ -90,7 +90,7 @@ public class WechatHandlerService extends BaseWeiXinProcessWervice{
 
 	@Override
 	public OutMessage handleTextMsgRequest(Object msg) {
-		//接收到内容为“拍卖”的文本消息，返回拍卖入口链接给用户
+		//关键字回复
 		InTextMessage inTextMsg =(InTextMessage)msg;
 		OutMessage outMessage =null;
 		String outType =null;
@@ -102,11 +102,16 @@ public class WechatHandlerService extends BaseWeiXinProcessWervice{
 		String msgType =BaseWeiXinProcessWervice.RESPONSE_MESSAGE_TYPE_TEXT;
 		Setting setting =SettingUtils.get();
 		String site_url =setting.getSiteUrl();
-		String page_url =site_url+"/paimaipage/site/index.do?from_user="+fromUserName;
+		String page_url =site_url+"/index.do?from_user="+fromUserName;
 		String content =null;
 		if(userContent.equals("拍卖"))
 		{
 			content ="您好，点击这里试试<a href=\""+page_url+"\">拍卖专场</a>";
+		}
+		else if(userContent.equals("测试支付"))
+		{
+			page_url =site_url+"/wxpay/test/wx-test-pay.do?from_user="+fromUserName;
+			content ="Pay Test <a href=\""+page_url+"\">Pay</a>";
 		}
 		else
 		{

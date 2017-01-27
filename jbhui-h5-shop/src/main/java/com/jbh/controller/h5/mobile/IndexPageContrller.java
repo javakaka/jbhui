@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezcloud.framework.controller.BaseController;
 import com.ezcloud.framework.util.ResponseVO;
+import com.ezcloud.framework.util.StringUtil;
 import com.ezcloud.framework.vo.DataSet;
 import com.ezcloud.framework.vo.Row;
 import com.jbh.service.GoodsService;
@@ -31,12 +32,16 @@ public class IndexPageContrller  extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/index",method =RequestMethod.GET)
-	public String indexPage(ModelMap model ) {
+	public String indexPage(String from_user,ModelMap model ) {
 		HttpSession session =getSession();
 		Row user =(Row)session.getAttribute("member");
 		int isLogin =0;
 		if (user != null) {
 			isLogin =1;
+		}
+		if( !StringUtil.isEmptyOrNull(from_user) )
+		{
+			session.setAttribute("from_user", from_user);
 		}
 		//置顶商品
 		DataSet top_goods =goodsService.queryTopGoods();

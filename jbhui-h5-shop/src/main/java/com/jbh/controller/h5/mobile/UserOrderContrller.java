@@ -1,9 +1,15 @@
 package com.jbh.controller.h5.mobile;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -11,12 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ezcloud.framework.common.Setting;
 import com.ezcloud.framework.controller.BaseController;
+import com.ezcloud.framework.exp.JException;
+import com.ezcloud.framework.service.pay.WeixinTicketService;
 import com.ezcloud.framework.service.system.SystemConfigService;
 import com.ezcloud.framework.util.ResponseVO;
+import com.ezcloud.framework.util.SettingUtils;
+import com.ezcloud.framework.util.SpringUtils;
 import com.ezcloud.framework.util.StringUtil;
 import com.ezcloud.framework.vo.DataSet;
+import com.ezcloud.framework.vo.IVO;
+import com.ezcloud.framework.vo.OVO;
 import com.ezcloud.framework.vo.Row;
+import com.ezcloud.framework.weixin.common.WeixinTicketSign;
 import com.jbh.service.DeliveryService;
 import com.jbh.service.GoodsService;
 import com.jbh.service.OrderItemService;
@@ -48,6 +62,9 @@ public class UserOrderContrller  extends BaseController {
 	
 	@Resource(name = "hslgDeliveryService")
 	private DeliveryService deliveryService;
+	
+	@Resource(name = "frameworkWeixinTicketService")
+	private WeixinTicketService weixinTicketService;
 	
 	private static Logger logger =Logger.getLogger(UserOrderContrller.class);
 	
@@ -104,9 +121,10 @@ public class UserOrderContrller  extends BaseController {
 	/**
 	 * @param model
 	 * @return
+	 * @throws JException 
 	 */
 	@RequestMapping(value = "/detail",method =RequestMethod.GET)
-	public String detailPage(String id,ModelMap model ) {
+	public String detailPage(String id,HttpServletRequest request,ModelMap model ) throws JException {
 		//订单基本信息	
 		Row orderRow =orderService.find(id);
 		//收货地址信息
@@ -116,6 +134,119 @@ public class UserOrderContrller  extends BaseController {
 			addressId =orderRow.getString("address_id");
 		}
 		Row addressRow =userAddressService.find(addressId);
+		//订单商品列表信息
+		DataSet goodsList =orderItemService.findOrderItems(id);
+		model.addAttribute("id", id);
+		model.addAttribute("order", orderRow);
+		model.addAttribute("address", addressRow);
+		model.addAttribute("goodsList", goodsList);
+		String orderNo =orderRow.getString("order_no");
+		// 加载微信支付的相关数据--------------------------------------- Begin //
+		Setting setting =SettingUtils.get();
+		String site_url =setting.getSiteUrl();
+		//取出token 生成签名
+		Row row =weixinTicketService.queryByPMAndState("1","1");
+		String jsapi_ticket =row.getString("ticket","");
+		String nonceStr ="";
+		String timestamp ="";
+		String signature ="";
+		String url =site_url+"/user/order/detail.do?id="+id;
+		Map<String, String> map=WeixinTicketSign.sign(jsapi_ticket, url);
+		nonceStr =map.get("nonceStr");
+		timestamp =map.get("timestamp");
+		signature =map.get("signature");
+		String app_id =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_ID");
+		model.addAttribute("appId", app_id);
+		model.addAttribute("timestamp", timestamp);
+		model.addAttribute("nonceStr", nonceStr);
+		model.addAttribute("signature", signature);
+		String app_remote_ip =request.getRemoteAddr();
+		String app_remote_host =request.getRemoteHost();
+		logger.info("---------------app_remote_ip--------->>"+app_remote_ip);
+		logger.info("---------------app_remote_ip--------->>"+request.getRemoteHost());
+		//取订单信息
+		IVO ivo =new IVO(0);
+		ivo.set("app_ip", app_remote_host);
+		String user_id =orderRow.getString("user_id");
+		ivo.set("user_id", user_id);
+		String order_id =orderRow.getString("id");
+		ivo.set("order_id", order_id);
+		String service_name ="paimaiWeiXinJSPayOrderService";
+		Object serviceObj =null;
+		OVO ovo =null;
+		try
+		{
+			serviceObj =SpringUtils.getBean(service_name);
+			if(serviceObj == null)
+			{
+				return "/jbhpage/h5/user-order-detail";
+			}
+			Method method =serviceObj.getClass().getDeclaredMethod("validate",IVO.class);;
+			ovo =(OVO)method.invoke(serviceObj,ivo);
+		}catch(NoSuchBeanDefinitionException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException exp)
+		{
+			exp.printStackTrace();
+			return "/jbhpage/h5/user-order-detail";
+		}
+		
+		int code =ovo.iCode;
+		String pay_timestamp ="";
+		String pay_noncestr ="";
+		String pay_package ="";
+		String pay_signtype ="";
+		String pay_paysign ="";
+		String pay_token ="";
+		if(code >= 0)
+		{
+			pay_timestamp =ovo.getString("timestamp","");
+			pay_noncestr =ovo.getString("noncestr","");
+			pay_package =ovo.getString("package","");
+			pay_signtype =ovo.getString("signtype","");
+			pay_paysign =ovo.getString("sign","");
+			pay_token =ovo.getString("pay_token","");
+		}
+		else if(code < 0)
+		{
+			logger.info("============="+ovo.sMsg);
+		}
+		model.addAttribute("pay_timestamp", pay_timestamp);
+		model.addAttribute("pay_noncestr", pay_noncestr);
+		model.addAttribute("pay_package", pay_package);
+		model.addAttribute("pay_signtype", pay_signtype);
+		model.addAttribute("pay_paysign", pay_paysign);
+		model.addAttribute("pay_token", pay_token);
+		// 加载微信支付的相关数据--------------------------------------- End //
+		return "/jbhpage/h5/user-order-detail";
+	}
+	/**
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/finish",method =RequestMethod.GET)
+	public String payFinishPage(String id,String token,ModelMap model ) {
+		//订单基本信息	
+		Row orderRow =orderService.find(id);
+		//收货地址信息
+		String addressId =null;
+		if( orderRow != null)
+		{
+			addressId =orderRow.getString("address_id");
+		}
+		Row addressRow =userAddressService.find(addressId);
+		
+		//更改订单状态
+		if (! StringUtil.isEmptyOrNull(token)) {
+			String dbPayToken =orderRow.getString("pay_token");
+			String state =orderRow.getString("state");
+			if(token.equals(dbPayToken) && state.equals("0"))
+			{
+				Row updateOrderRow =new Row();
+				updateOrderRow.put("id", id);
+				updateOrderRow.put("state", "1");
+				orderService.update(updateOrderRow);
+			}
+		}
+		orderRow.put("state", "1");
 		//订单商品列表信息
 		DataSet goodsList =orderItemService.findOrderItems(id);
 		model.addAttribute("id", id);
@@ -215,9 +346,10 @@ public class UserOrderContrller  extends BaseController {
 	 * 根据订单号显示订单信息
 	 * @param model
 	 * @return
+	 * @throws JException 
 	 */
 	@RequestMapping(value = "/create-step3",method =RequestMethod.GET)
-	public String createOrderStep3(String orderNo,ModelMap model ) {
+	public String createOrderStep3(String orderNo,HttpServletRequest request,ModelMap model ) throws JException {
 		if(StringUtil.isEmptyOrNull(orderNo))
 		{
 			return "/jbhpage/h5/order-pay-step2";
@@ -228,6 +360,82 @@ public class UserOrderContrller  extends BaseController {
 			return "/jbhpage/h5/order-pay-step2";
 		}
 		model.addAttribute("order", orderRow);
+		// 加载微信支付的相关数据--------------------------------------- Begin //
+		Setting setting =SettingUtils.get();
+		String site_url =setting.getSiteUrl();
+		//取出token 生成签名
+		Row row =weixinTicketService.queryByPMAndState("1","1");
+		String jsapi_ticket =row.getString("ticket","");
+		String nonceStr ="";
+		String timestamp ="";
+		String signature ="";
+		String url =site_url+"/user/order/create-step3.do?orderNo="+orderNo;
+		Map<String, String> map=WeixinTicketSign.sign(jsapi_ticket, url);
+		nonceStr =map.get("nonceStr");
+		timestamp =map.get("timestamp");
+		signature =map.get("signature");
+		String app_id =systemConfigService.getConfigValue("PAIMAI_WXPAY","APP_ID");
+		model.addAttribute("appId", app_id);
+		model.addAttribute("timestamp", timestamp);
+		model.addAttribute("nonceStr", nonceStr);
+		model.addAttribute("signature", signature);
+		String app_remote_ip =request.getRemoteAddr();
+		String app_remote_host =request.getRemoteHost();
+		logger.info("---------------app_remote_ip--------->>"+app_remote_ip);
+		logger.info("---------------app_remote_ip--------->>"+request.getRemoteHost());
+		//取订单信息
+		IVO ivo =new IVO(0);
+		ivo.set("app_ip", app_remote_host);
+		String user_id =orderRow.getString("user_id");
+		ivo.set("user_id", user_id);
+		String order_id =orderRow.getString("id");
+		ivo.set("order_id", order_id);
+		String service_name ="paimaiWeiXinJSPayOrderService";
+		Object serviceObj =null;
+		OVO ovo =null;
+		try
+		{
+			serviceObj =SpringUtils.getBean(service_name);
+			if(serviceObj == null)
+			{
+				return "/jbhpage/h5/order-pay-step2";
+			}
+			Method method =serviceObj.getClass().getDeclaredMethod("validate",IVO.class);;
+			ovo =(OVO)method.invoke(serviceObj,ivo);
+		}catch(NoSuchBeanDefinitionException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException exp)
+		{
+			exp.printStackTrace();
+			return "/jbhpage/h5/order-pay-step2";
+		}
+		
+		int code =ovo.iCode;
+		String pay_timestamp ="";
+		String pay_noncestr ="";
+		String pay_package ="";
+		String pay_signtype ="";
+		String pay_paysign ="";
+		String pay_token ="";
+		if(code >= 0)
+		{
+			pay_timestamp =ovo.getString("timestamp","");
+			pay_noncestr =ovo.getString("noncestr","");
+			pay_package =ovo.getString("package","");
+			pay_signtype =ovo.getString("signtype","");
+			pay_paysign =ovo.getString("sign","");
+			pay_token =ovo.getString("pay_token","");
+		}
+		else if(code < 0)
+		{
+			logger.info("============="+ovo.sMsg);
+		}
+		model.addAttribute("pay_timestamp", pay_timestamp);
+		model.addAttribute("pay_noncestr", pay_noncestr);
+		model.addAttribute("pay_package", pay_package);
+		model.addAttribute("pay_signtype", pay_signtype);
+		model.addAttribute("pay_paysign", pay_paysign);
+		model.addAttribute("pay_token", pay_token);
+		// 加载微信支付的相关数据--------------------------------------- End //
+		model.addAttribute("order_id", order_id);
 		return "/jbhpage/h5/order-pay-step2";
 	}
 	

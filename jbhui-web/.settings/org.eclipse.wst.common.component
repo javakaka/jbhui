@@ -13,16 +13,16 @@
         <dependent-module archiveName="jbhui-h5-shop-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbhui-h5-shop/jbhui-h5-shop">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="jbhui-wechat-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbhui-wechat/jbhui-wechat">
+        <dependent-module archiveName="ezcloud-wechat-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ezcloud-wechat/ezcloud-wechat">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="ezcloud-wechat-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ezcloud-wechat/ezcloud-wechat">
+        <dependent-module archiveName="jbhui-wechat-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jbhui-wechat/jbhui-wechat">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="crds-dm-1.0-RELEASE.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/crds-dm/crds-dm">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/jbhui-web/target/classes"/>
-        <property name="context-root" value="jbhui"/>
+        <property name="context-root" value="jbhui-web"/>
     </wb-module>
 </project-modules>

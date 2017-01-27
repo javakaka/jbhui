@@ -35,10 +35,28 @@ function addGoodsToCart(goodsId, goodsNum)
 					var storeGoodsId =itemArr[0];
 					if(goodsId == storeGoodsId)
 					{
+						var goodsNewNum =parseInt( itemArr[1] ) +parseInt(goodsNum);
+						goodsArr[i] =goodsId+"@"+goodsNewNum;
 						isAlreadyStored =true;
 						break;
 					}
 				}
+			}
+			if( isAlreadyStored )
+			{
+				shopCarCookie ="";
+				for(var i=0; i< goodsArr.length; i++)
+				{
+					if( i==0)
+					{
+						shopCarCookie =shopCarCookie+goodsArr[i];
+					}
+					else
+					{
+						shopCarCookie =shopCarCookie+","+goodsArr[i];
+					}
+				}
+				setCookie("shop_car",shopCarCookie );
 			}
 		}
 		if( ! isAlreadyStored )
@@ -125,6 +143,38 @@ function loadShopCardGoodsPage(page, pageSize)
 		}
 	}
 	console.log("......................."+goodsIdArr);
+	return goodsIdArr;
+}
+
+/**
+ * 购物车页面加载商品数量
+ */
+function loadCartGoodsNum()
+{
+	var goodsIdArr ="";
+	var shopCarCookie =loadCookie("shop_car");
+	if( typeof  shopCarCookie == "undefined" || shopCarCookie == "" || shopCarCookie == null || shopCarCookie == "null")
+	{
+		return "";
+	}
+	else
+	{
+		var goodsArr =shopCarCookie.split(",");
+		if( typeof goodsArr != "undefined" )
+		{
+			for(var i=0; i< goodsArr.length; i++)
+			{
+				var itemArr =goodsArr[i].split("@");
+				if( typeof itemArr != "undefined" && itemArr != "" )
+				{
+					var goodsId =itemArr[0];
+					var goodsDomId="#select_goods_"+goodsId;
+					$(goodsDomId).val(itemArr[1]);
+				}
+			}
+		}
+	}
+	console.log("goodsIdArr......................."+goodsIdArr);
 	return goodsIdArr;
 }
 

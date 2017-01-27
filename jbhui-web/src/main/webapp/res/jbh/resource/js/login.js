@@ -8,6 +8,7 @@ var loginBtn =$("#loginBtn");
 var errorTip =$("#errorTip");
 var username =$("#username");
 var password =$("#password");
+var from_user =$("#from_user");
 
 document.addEventListener('DOMContentLoaded', function() {
 	$(document).ready(function() {
@@ -50,7 +51,7 @@ function initPageFuns(){
 *刷新
 **/
 function submit() {
-	var params ={username: username.val(),password: hex_md5( password.val() )};
+	var params ={username: username.val(),password: hex_md5( password.val() ),from_user:from_user.val()};
 	$.ajax({
 		type:"post",
 		url: SITE_PATH + URI,

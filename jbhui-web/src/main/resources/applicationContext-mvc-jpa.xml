@@ -15,13 +15,14 @@
 	<mvc:annotation-driven validator="validator" />
 	
 <!-- 
+	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/payment/**" />
 			<bean id="tokenInterceptor" class="" />
 		</mvc:interceptor>
-		-->
 	</mvc:interceptors>
+		-->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>

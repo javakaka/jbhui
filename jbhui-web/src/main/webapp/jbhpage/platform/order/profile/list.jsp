@@ -125,7 +125,7 @@ function exportExcel()
 	var user_id=$('#user_id').val(); 
 	var start_date=$('#start_date').val(); 
 	var end_date=$('#end_date').val(); */
-	var url ="<%=basePath%>/hslgpage/platform/order/profile/export-order.do?";
+	var url ="<%=basePath%>/jbhpage/platform/order/profile/export-order.do?";
 	/* url +="&user_id="+user_id; */	
 	window.open(url);
 }
@@ -138,7 +138,7 @@ function showOrderItems(order_id)
 	var div_name ="order_item_div";
 	$("[name='order_item_div']").hide();
 	$(div_id).show();
-	var url ="<%=basePath%>/hslgpage/platform/order/item/list-by-order-id.do"
+	var url ="<%=basePath%>/jbhpage/platform/order/item/list-by-order-id.do"
 	var params ={order_id : order_id};
 	$.ajax({
 		url: url,
@@ -197,7 +197,7 @@ function saveOrder(id)
 	var delivery_id =$("#select_deliver_"+id).val();
 	var transfer_state =$("#tranfer_state_"+id).val();
 	alert(pay_type + state + delivery_id + transfer_state);
-	var url ="<%=basePath%>/hslgpage/platform/order/profile/update-ajax.do";
+	var url ="<%=basePath%>/jbhpage/platform/order/profile/update-ajax.do";
 	var params ={id : id,state: state, delivery_id : delivery_id, transfer_state : transfer_state};
 	$.ajax({
 		url: url,
@@ -350,17 +350,21 @@ function saveOrder(id)
 					<a href="javascript:;" class="sort" name="STATE">支付状态</a>
 				</th>
 				<th>
-					<a href="javascript:;" >配送时间</a>
+					<a href="javascript:;" >订单备注</a>
 				</th>
+				
 				<th>
 					<a href="javascript:;" >配送地址</a>
 				</th>
+				<!-- 
 				<th>
 					<a href="javascript:;" >配送人</a>
 				</th>
+				
 				<th>
 					<a href="javascript:;" class="sort" name="TRANSFER_STATE">配送状态</a>
 				</th>
+				-->
 				<th>
 					<a href="javascript:;" class="sort" name="CREATE_TIME">创建时间</a>
 				</th>
@@ -408,6 +412,8 @@ function saveOrder(id)
 							<c:otherwise>--</c:otherwise>
 						</c:choose>
 						-->
+						微信支付
+						<!-- 
 						<select id="pay_type_${row.ID }">
 						<c:choose>
 							<c:when test="${row.PAY_TYPE == 2}">
@@ -433,6 +439,7 @@ function saveOrder(id)
 							</c:otherwise>
 						</c:choose>
 						</select>
+						-->
 					</td>
 					<td>
 						<select id="order_state_${row.ID }">
@@ -442,30 +449,90 @@ function saveOrder(id)
 								<option value="1" >已付款未到账</option>
 								<option value="2" >已到账待收货</option>
 								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
 							</c:when>
 							<c:when test="${row.STATE == 1}">
-								<option value="0" selected>待付款</option>
-								<option value="1" >已付款未到账</option>
+								<option value="0" >待付款</option>
+								<option value="1" selected>已付款未到账</option>
 								<option value="2" >已到账待收货</option>
 								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
 							</c:when>
 							<c:when test="${row.STATE == 2}">
 								<option value="0" >待付款</option>
 								<option value="1" >已付款未到账</option>
 								<option value="2" selected>已到账待收货</option>
 								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
 							</c:when>
 							<c:when test="${row.STATE == 3}">
 								<option value="0" >待付款</option>
 								<option value="1" >已付款未到账</option>
 								<option value="2" >已到账待收货</option>
 								<option value="3" selected>已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
 							</c:when>
-							<c:otherwise>
+							<c:when test="${row.STATE == 4}">
 								<option value="0" >待付款</option>
 								<option value="1" >已付款未到账</option>
 								<option value="2" >已到账待收货</option>
-								<option value="3" selected>已收货</option>
+								<option value="3" >已收货</option>
+								<option value="4" selected>申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
+							</c:when>
+							<c:when test="${row.STATE == 5}">
+								<option value="0" >待付款</option>
+								<option value="1" >已付款未到账</option>
+								<option value="2" >已到账待收货</option>
+								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" selected>退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
+							</c:when>
+							<c:when test="${row.STATE == 6}">
+								<option value="0" >待付款</option>
+								<option value="1" >已付款未到账</option>
+								<option value="2" >已到账待收货</option>
+								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" selected>已退款</option>
+								<option value="-1" >已取消</option>
+							</c:when>
+							<c:when test="${row.STATE == -1}">
+								<option value="0" >待付款</option>
+								<option value="1" >已付款未到账</option>
+								<option value="2" >已到账待收货</option>
+								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" selected>已取消</option>
+							</c:when>
+							<c:otherwise>
+								<option value="0" selected>待付款</option>
+								<option value="1" >已付款未到账</option>
+								<option value="2" >已到账待收货</option>
+								<option value="3" >已收货</option>
+								<option value="4" >申请退款</option>
+								<option value="5" >退款未到账</option>
+								<option value="6" >已退款</option>
+								<option value="-1" >已取消</option>
 							</c:otherwise>
 						</c:choose>
 						</select>
@@ -488,6 +555,7 @@ function saveOrder(id)
 					<td>
 						<span title="${row.RECEIVE_NAME}">${row.RECEIVE_NAME} - ${row.ADDRESS} ${row.RECEIVE_TEL} ${row.ZIP_CODE}</span>
 					</td>
+					<!-- 
 					<td>
 						<select id="select_deliver_${row.ID }">
 							<c:forEach items="${deliver_list}" var="deliver" varStatus="status">
@@ -502,15 +570,15 @@ function saveOrder(id)
 							</c:forEach>
 						</select>
 					</td>
+					
 					<td>
-					<!-- 
 						<c:choose>
 							<c:when test="${row.TRANSFER_STATE == 0}">未配送</c:when>
 							<c:when test="${row.TRANSFER_STATE == 1}">配送中</c:when>
 							<c:when test="${row.TRANSFER_STATE == 2}">配送完成</c:when>
 							<c:otherwise>--</c:otherwise>
 						</c:choose>
-						-->
+						
 						<select id="tranfer_state_${row.ID }">
 							<c:choose>
 							<c:when test="${row.TRANSFER_STATE == 0}">
@@ -536,13 +604,16 @@ function saveOrder(id)
 						</c:choose>
 						</select>
 					</td>
+						-->
 					<td>
 						${row.CREATE_TIME}
 					</td>
 					<td>
 						<a href="edit.do?id=${row.ID}"><cc:message key="admin.common.edit" /></a>
 						<a href="javascript:void(0);" onclick="openTabFromTopWindow('${row.ORDER_NO}','ORDER_NO')">明细</a>
+						<!-- 
 						<a href="javascript:void(0);" onclick="saveOrder('${row.ID}')">保存</a>
+						-->
 						<a href="print.do?id=${row.ID}">打印</a>
 						<!--<a href="edit.do?id=${row.ID}"><cc:message key="admin.common.edit" /></a>-->
 						<!--<a href="#" target="_blank"><cc:message key="admin.common.view" /></a>-->
@@ -567,7 +638,7 @@ function saveOrder(id)
 
 function openTabFromTopWindow(searchValue,searchProperty)
 {
-	var url ="<%=basePath%>/hslgpage/platform/order/item/list.do";
+	var url ="<%=basePath%>/jbhpage/platform/order/item/list.do";
 	if(typeof searchValue != "undefined" && searchValue !="")
 	{
 		url +="?searchValue="+searchValue;

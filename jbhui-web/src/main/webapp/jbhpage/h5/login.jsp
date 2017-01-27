@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	<!-- right start -->
         <div class="rightBox">
-        <a id="register_btn" href="<%=basePath%>h5-register.do" class="right rbtn">
+        <a id="register_btn" href="<%=basePath%>h5-register.do?from_user=${from_user }" class="right rbtn">
             注册
         </a>
         </div>
@@ -50,6 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <label class="icon-my" for="touchweb_form-username"></label>
             <div class="input_box">
                 <input type="text"  placeholder="邮箱/手机/用户名" name="username" id="username" value="" />
+                <input type="hidden" name="from_user" id="from_user" value="${from_user }" />
                 <span class="icon_delete icon-delete"></span>
             </div>
         </div>
@@ -99,6 +100,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="<%=basePath%>/res/js/httputil.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/res/js/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/res/js/md5.js"></script>
-	<script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/login.js"></script>
+	<script type="text/javascript" src="<%=basePath%>res/jbh/resource/js/login.js?v=1.001"></script>
 </body>
 </html>

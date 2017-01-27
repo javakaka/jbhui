@@ -167,6 +167,21 @@ public class UserAddressService extends JdbcService{
 		return ds;
 	}
 	
+	public DataSet listAll( String user_id )
+	{
+		DataSet ds =new DataSet();
+		String sql = "select * from ("
+				+" select a.*, "
+				+" cp.`name` as province_name,cc.`name` as city_name,ccz.`name` as region_name " 
+				+" from hslg_receive_address a "
+				+" left join common_province cp on a.province_id=cp.id "
+				+" left join common_city cc on a.city_id=cc.id "
+				+" left join common_city_zone ccz on a.region_id=ccz.id "
+				+" ) as tab where user_id='"+user_id +"'";
+		ds =queryDataSet(sql);
+		return ds;
+	}
+	
 	/**
 	 * 删除
 	 * 
